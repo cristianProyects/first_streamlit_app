@@ -12,7 +12,8 @@ import pandas
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 my_fruit_list = my_fruit_list.set_index ( 'Fruit' )
 # Let's put a pick list here so they can pick the fruit they want to include 
-streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
+fruits_to_show = streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries']) # Incluye el menu para que el usuario seleccione y guarda esta seleccion en una variable
+fruits_to_show = my_fruit_list.loc [fruits_selected ] # Busca los valores que se seleccionaron en el menu para posteriormente solo cargar esos datos
 
 # Display the table on the page.
-streamlit.dataframe(my_fruit_list)
+streamlit.dataframe(fruits_to_show)
